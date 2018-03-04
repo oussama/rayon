@@ -29,7 +29,8 @@ impl Drop for AbortIfPanic {
     fn drop(&mut self) {
         unsafe {
             let _ = writeln!(&mut stderr(), "Rayon: detected unexpected panic; aborting");
-            libc::abort();
+            use std::process;
+            process::abort();
         }
     }
 }
